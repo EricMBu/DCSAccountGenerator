@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             lstAccounts = new ListBox();
             btnNew = new Button();
             txtInfo = new RichTextBox();
             imgCaptcha = new PictureBox();
             txtUName = new TextBox();
             btnActivate = new Button();
-            txtPassword = new TextBox();
             lblStatus = new Label();
             txtCaptcha = new TextBox();
             btnCreate = new Button();
@@ -55,6 +55,7 @@
             // 
             // btnNew
             // 
+            btnNew.Enabled = false;
             btnNew.Location = new Point(195, 16);
             btnNew.Margin = new Padding(3, 2, 3, 2);
             btnNew.Name = "btnNew";
@@ -90,12 +91,12 @@
             txtUName.Margin = new Padding(3, 2, 3, 2);
             txtUName.Name = "txtUName";
             txtUName.PlaceholderText = "Username";
-            txtUName.ReadOnly = true;
             txtUName.Size = new Size(110, 23);
             txtUName.TabIndex = 4;
             // 
             // btnActivate
             // 
+            btnActivate.Enabled = false;
             btnActivate.Location = new Point(354, 16);
             btnActivate.Margin = new Padding(3, 2, 3, 2);
             btnActivate.Name = "btnActivate";
@@ -103,16 +104,6 @@
             btnActivate.TabIndex = 5;
             btnActivate.Text = "Activate Trial";
             btnActivate.UseVisualStyleBackColor = true;
-            // 
-            // txtPassword
-            // 
-            txtPassword.Location = new Point(195, 101);
-            txtPassword.Margin = new Padding(3, 2, 3, 2);
-            txtPassword.Name = "txtPassword";
-            txtPassword.PlaceholderText = "Password";
-            txtPassword.ReadOnly = true;
-            txtPassword.Size = new Size(110, 23);
-            txtPassword.TabIndex = 6;
             // 
             // lblStatus
             // 
@@ -135,22 +126,26 @@
             // 
             // btnCreate
             // 
-            btnCreate.Location = new Point(195, 193);
+            btnCreate.Enabled = false;
+            btnCreate.Location = new Point(195, 148);
             btnCreate.Margin = new Padding(3, 2, 3, 2);
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(82, 22);
             btnCreate.TabIndex = 9;
             btnCreate.Text = "Confirm";
             btnCreate.UseVisualStyleBackColor = true;
+            btnCreate.Click += btnCreate_Click;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(283, 192);
+            btnCancel.Enabled = false;
+            btnCancel.Location = new Point(195, 175);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(75, 23);
+            btnCancel.Size = new Size(82, 23);
             btnCancel.TabIndex = 10;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // Form1
             // 
@@ -161,13 +156,13 @@
             Controls.Add(btnCreate);
             Controls.Add(txtCaptcha);
             Controls.Add(lblStatus);
-            Controls.Add(txtPassword);
             Controls.Add(btnActivate);
             Controls.Add(txtUName);
             Controls.Add(imgCaptcha);
             Controls.Add(txtInfo);
             Controls.Add(btnNew);
             Controls.Add(lstAccounts);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             Name = "Form1";
             Text = "Account Manager";
@@ -185,7 +180,6 @@
         private PictureBox imgCaptcha;
         private TextBox txtUName;
         private Button btnActivate;
-        private TextBox txtPassword;
         private Label lblStatus;
         private TextBox txtCaptcha;
         private Button btnCreate;
