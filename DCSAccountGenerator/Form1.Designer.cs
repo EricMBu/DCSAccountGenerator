@@ -28,137 +28,153 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstAccounts = new System.Windows.Forms.ListBox();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.txtInfo = new System.Windows.Forms.RichTextBox();
-            this.imgCaptcha = new System.Windows.Forms.PictureBox();
-            this.txtUName = new System.Windows.Forms.TextBox();
-            this.btnActivate = new System.Windows.Forms.Button();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.txtCaptcha = new System.Windows.Forms.TextBox();
-            this.btnCreate = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.imgCaptcha)).BeginInit();
-            this.SuspendLayout();
+            lstAccounts = new ListBox();
+            btnNew = new Button();
+            txtInfo = new RichTextBox();
+            imgCaptcha = new PictureBox();
+            txtUName = new TextBox();
+            btnActivate = new Button();
+            txtPassword = new TextBox();
+            lblStatus = new Label();
+            txtCaptcha = new TextBox();
+            btnCreate = new Button();
+            btnCancel = new Button();
+            ((System.ComponentModel.ISupportInitialize)imgCaptcha).BeginInit();
+            SuspendLayout();
             // 
             // lstAccounts
             // 
-            this.lstAccounts.FormattingEnabled = true;
-            this.lstAccounts.ItemHeight = 20;
-            this.lstAccounts.Items.AddRange(new object[] {
-            "Thing",
-            "Other thing",
-            "I\'m tired",
-            "DCS",
-            "h"});
-            this.lstAccounts.Location = new System.Drawing.Point(30, 22);
-            this.lstAccounts.Name = "lstAccounts";
-            this.lstAccounts.Size = new System.Drawing.Size(150, 264);
-            this.lstAccounts.TabIndex = 0;
-            this.lstAccounts.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            lstAccounts.FormattingEnabled = true;
+            lstAccounts.ItemHeight = 15;
+            lstAccounts.Location = new Point(26, 16);
+            lstAccounts.Margin = new Padding(3, 2, 3, 2);
+            lstAccounts.Name = "lstAccounts";
+            lstAccounts.Size = new Size(132, 199);
+            lstAccounts.TabIndex = 0;
+            lstAccounts.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(223, 22);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(124, 29);
-            this.btnNew.TabIndex = 1;
-            this.btnNew.Text = "New Account";
-            this.btnNew.UseVisualStyleBackColor = true;
+            btnNew.Location = new Point(195, 16);
+            btnNew.Margin = new Padding(3, 2, 3, 2);
+            btnNew.Name = "btnNew";
+            btnNew.Size = new Size(108, 22);
+            btnNew.TabIndex = 1;
+            btnNew.Text = "New Account";
+            btnNew.UseVisualStyleBackColor = true;
+            btnNew.Click += btnNew_Click;
             // 
             // txtInfo
             // 
-            this.txtInfo.Location = new System.Drawing.Point(30, 318);
-            this.txtInfo.Name = "txtInfo";
-            this.txtInfo.ReadOnly = true;
-            this.txtInfo.Size = new System.Drawing.Size(237, 120);
-            this.txtInfo.TabIndex = 2;
-            this.txtInfo.Text = "";
-            this.txtInfo.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            txtInfo.Location = new Point(26, 238);
+            txtInfo.Margin = new Padding(3, 2, 3, 2);
+            txtInfo.Name = "txtInfo";
+            txtInfo.ReadOnly = true;
+            txtInfo.Size = new Size(208, 91);
+            txtInfo.TabIndex = 2;
+            txtInfo.Text = "";
+            txtInfo.TextChanged += richTextBox1_TextChanged;
             // 
             // imgCaptcha
             // 
-            this.imgCaptcha.Location = new System.Drawing.Point(405, 90);
-            this.imgCaptcha.Name = "imgCaptcha";
-            this.imgCaptcha.Size = new System.Drawing.Size(125, 62);
-            this.imgCaptcha.TabIndex = 3;
-            this.imgCaptcha.TabStop = false;
+            imgCaptcha.Location = new Point(354, 68);
+            imgCaptcha.Margin = new Padding(3, 2, 3, 2);
+            imgCaptcha.Name = "imgCaptcha";
+            imgCaptcha.Size = new Size(109, 46);
+            imgCaptcha.TabIndex = 3;
+            imgCaptcha.TabStop = false;
             // 
             // txtUName
             // 
-            this.txtUName.Location = new System.Drawing.Point(223, 90);
-            this.txtUName.Name = "txtUName";
-            this.txtUName.PlaceholderText = "Username";
-            this.txtUName.ReadOnly = true;
-            this.txtUName.Size = new System.Drawing.Size(125, 27);
-            this.txtUName.TabIndex = 4;
+            txtUName.Location = new Point(195, 68);
+            txtUName.Margin = new Padding(3, 2, 3, 2);
+            txtUName.Name = "txtUName";
+            txtUName.PlaceholderText = "Username";
+            txtUName.ReadOnly = true;
+            txtUName.Size = new Size(110, 23);
+            txtUName.TabIndex = 4;
             // 
             // btnActivate
             // 
-            this.btnActivate.Location = new System.Drawing.Point(405, 22);
-            this.btnActivate.Name = "btnActivate";
-            this.btnActivate.Size = new System.Drawing.Size(118, 29);
-            this.btnActivate.TabIndex = 5;
-            this.btnActivate.Text = "Activate Trial";
-            this.btnActivate.UseVisualStyleBackColor = true;
+            btnActivate.Location = new Point(354, 16);
+            btnActivate.Margin = new Padding(3, 2, 3, 2);
+            btnActivate.Name = "btnActivate";
+            btnActivate.Size = new Size(103, 22);
+            btnActivate.TabIndex = 5;
+            btnActivate.Text = "Activate Trial";
+            btnActivate.UseVisualStyleBackColor = true;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(223, 135);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PlaceholderText = "Password";
-            this.txtPassword.ReadOnly = true;
-            this.txtPassword.Size = new System.Drawing.Size(125, 27);
-            this.txtPassword.TabIndex = 6;
+            txtPassword.Location = new Point(195, 101);
+            txtPassword.Margin = new Padding(3, 2, 3, 2);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PlaceholderText = "Password";
+            txtPassword.ReadOnly = true;
+            txtPassword.Size = new Size(110, 23);
+            txtPassword.TabIndex = 6;
             // 
             // lblStatus
             // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(502, 418);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(50, 20);
-            this.lblStatus.TabIndex = 7;
-            this.lblStatus.Text = "label1";
+            lblStatus.AutoSize = true;
+            lblStatus.Location = new Point(439, 314);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(38, 15);
+            lblStatus.TabIndex = 7;
+            lblStatus.Text = "label1";
             // 
             // txtCaptcha
             // 
-            this.txtCaptcha.Location = new System.Drawing.Point(405, 158);
-            this.txtCaptcha.Name = "txtCaptcha";
-            this.txtCaptcha.PlaceholderText = "Captcha";
-            this.txtCaptcha.ReadOnly = true;
-            this.txtCaptcha.Size = new System.Drawing.Size(125, 27);
-            this.txtCaptcha.TabIndex = 8;
+            txtCaptcha.Location = new Point(354, 118);
+            txtCaptcha.Margin = new Padding(3, 2, 3, 2);
+            txtCaptcha.Name = "txtCaptcha";
+            txtCaptcha.PlaceholderText = "Captcha";
+            txtCaptcha.ReadOnly = true;
+            txtCaptcha.Size = new Size(110, 23);
+            txtCaptcha.TabIndex = 8;
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(223, 257);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(94, 29);
-            this.btnCreate.TabIndex = 9;
-            this.btnCreate.Text = "Confirm";
-            this.btnCreate.UseVisualStyleBackColor = true;
+            btnCreate.Location = new Point(195, 193);
+            btnCreate.Margin = new Padding(3, 2, 3, 2);
+            btnCreate.Name = "btnCreate";
+            btnCreate.Size = new Size(82, 22);
+            btnCreate.TabIndex = 9;
+            btnCreate.Text = "Confirm";
+            btnCreate.UseVisualStyleBackColor = true;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Location = new Point(283, 192);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(75, 23);
+            btnCancel.TabIndex = 10;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 450);
-            this.Controls.Add(this.btnCreate);
-            this.Controls.Add(this.txtCaptcha);
-            this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.btnActivate);
-            this.Controls.Add(this.txtUName);
-            this.Controls.Add(this.imgCaptcha);
-            this.Controls.Add(this.txtInfo);
-            this.Controls.Add(this.btnNew);
-            this.Controls.Add(this.lstAccounts);
-            this.Name = "Form1";
-            this.Text = "Account Manager";
-            ((System.ComponentModel.ISupportInitialize)(this.imgCaptcha)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(494, 338);
+            Controls.Add(btnCancel);
+            Controls.Add(btnCreate);
+            Controls.Add(txtCaptcha);
+            Controls.Add(lblStatus);
+            Controls.Add(txtPassword);
+            Controls.Add(btnActivate);
+            Controls.Add(txtUName);
+            Controls.Add(imgCaptcha);
+            Controls.Add(txtInfo);
+            Controls.Add(btnNew);
+            Controls.Add(lstAccounts);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "Form1";
+            Text = "Account Manager";
+            Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)imgCaptcha).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -173,5 +189,6 @@
         private Label lblStatus;
         private TextBox txtCaptcha;
         private Button btnCreate;
+        private Button btnCancel;
     }
 }
