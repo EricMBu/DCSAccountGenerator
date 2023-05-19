@@ -6,6 +6,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System.Diagnostics;
+using System.Net.Mail;
+using OpenQA.Selenium.Edge;
 
 namespace DCSAccountGenerator
 {
@@ -17,8 +19,8 @@ namespace DCSAccountGenerator
         private IWebDriver mailDriver;
         private WebDriverWait wait;
 
-        static string jsonString = File.ReadAllText("users.json");
-        List<Dictionary<string, object>> userList = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(jsonString);
+        static string jsonString;
+        List<Dictionary<string, object>> userList;
         private enum AppState { AwaitingInput, AddAccount };
         private AppState _currentAppState = AppState.AwaitingInput;
         private void UpdateState(AppState setState)
@@ -58,9 +60,19 @@ namespace DCSAccountGenerator
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            try
+            {
+                jsonString = File.ReadAllText("users.json");
+            }
+            catch (Exception ex)
+            {
+                File.WriteAllText("users.json", "[]");
+                jsonString = File.ReadAllText("users.json");
+            }
+            userList = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(jsonString);
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--headless");
-            wait = new WebDriverWait(mailDriver, TimeSpan.FromSeconds(10));
+            
             PopulateListBox();
             lblStatus.Text = string.Empty;
 
@@ -69,6 +81,7 @@ namespace DCSAccountGenerator
 
             edDriver = new ChromeDriver(driverService, options);
             mailDriver = new ChromeDriver(driverService, options);
+            wait = new WebDriverWait(mailDriver, TimeSpan.FromSeconds(10));
 
         }
 
@@ -84,7 +97,7 @@ namespace DCSAccountGenerator
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void lstAccounts_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateState(AppState.AwaitingInput);
             txtInfo.Text = DictToString(userList[lstAccounts.SelectedIndex]);
@@ -93,13 +106,14 @@ namespace DCSAccountGenerator
         private void btnNew_Click(object sender, EventArgs e)
         {
             UpdateState(AppState.AddAccount);
+            lblStatus.Text = "Loading sign-in page...";
+            edDriver.Navigate().GoToUrl("https://www.digitalcombatsimulator.com/en/auth/?register=yes");
+            mailDriver.Navigate().GoToUrl("https://10minute-email.com/");
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
             UpdateState(AppState.AwaitingInput);
-            edDriver.Navigate().GoToUrl("https://www.digitalcombatsimulator.com/en/auth/?register=yes");
-            mailDriver.Navigate().GoToUrl("https://10minute-email.com/");
 
             IWebElement form = edDriver.FindElement(By.Name("regform"));
 
