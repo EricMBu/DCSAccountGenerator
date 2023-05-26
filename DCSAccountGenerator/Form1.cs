@@ -80,7 +80,7 @@ namespace DCSAccountGenerator
             }
             userList = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(jsonString);
             ChromeOptions options = new ChromeOptions();
-            //options.AddArgument("--headless");
+            options.AddArgument("--headless");
 
             PopulateListBox();
             lblStatus.Text = string.Empty;
