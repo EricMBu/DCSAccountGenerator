@@ -26,7 +26,7 @@ namespace DCSAccountGenerator
 
         string jsonString;
         List<Dictionary<string, object>> userList;
-        private enum AppState { AwaitingInput, AddAccount };
+        private enum AppState { AwaitingInput, AddAccount, EmptySelection };
         private AppState _currentAppState = AppState.AwaitingInput;
         private void UpdateState(AppState setState)
         {
@@ -41,6 +41,9 @@ namespace DCSAccountGenerator
                     btnNew.Enabled = true;
                     btnActivate.Enabled = true;
                     txtCaptcha.Enabled = false;
+                    btnCopyPass.Enabled = true;
+                    btnCopyUname.Enabled = true;
+                    btnDelete.Enabled = true;
                     break;
                 case AppState.AddAccount:
                     lstAccounts.Enabled = false;
@@ -50,6 +53,21 @@ namespace DCSAccountGenerator
                     btnNew.Enabled = true;
                     btnActivate.Enabled = false;
                     txtCaptcha.Enabled = true;
+                    btnCopyPass.Enabled = false;
+                    btnCopyUname.Enabled = false;
+                    btnDelete.Enabled = false;
+                    break;
+                case AppState.EmptySelection:
+                    lstAccounts.Enabled = true;
+                    btnCreate.Enabled = false;
+                    btnCancel.Enabled = false;
+                    txtUName.Enabled = false;
+                    btnNew.Enabled = true;
+                    btnActivate.Enabled = false;
+                    txtCaptcha.Enabled = false;
+                    btnCopyPass.Enabled = false;
+                    btnCopyUname.Enabled = false;
+                    btnDelete.Enabled = false;
                     break;
             }
         }
@@ -104,9 +122,20 @@ namespace DCSAccountGenerator
 
         private void lstAccounts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateState(AppState.AwaitingInput);
-            txtInfo.Text = DictToString(userList[lstAccounts.SelectedIndex]);
-            btnActivate.Enabled = !(bool)userList[lstAccounts.SelectedIndex]["activated"];
+
+            if (lstAccounts.SelectedIndex < 0)
+            {
+                UpdateState(AppState.EmptySelection);
+                txtInfo.Text = string.Empty;
+
+            }
+            else
+            {
+                UpdateState(AppState.AwaitingInput);
+                txtInfo.Text = DictToString(userList[lstAccounts.SelectedIndex]);
+                btnActivate.Enabled = !(bool)userList[lstAccounts.SelectedIndex]["activated"];
+            }
+
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -231,6 +260,8 @@ namespace DCSAccountGenerator
 
                     UpdateState(AppState.AwaitingInput);
 
+                    lstAccounts.SelectedIndex = lstAccounts.Items.Count - 1;
+
                 }
             }
         }
@@ -318,6 +349,31 @@ namespace DCSAccountGenerator
             IWebElement captcha = edDriver.FindElement(By.Id("captcha-img"));
             string captchaURL = captcha.GetAttribute("src");
             imgCaptcha.Load(captchaURL);
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int index = lstAccounts.SelectedIndex;
+            userList.RemoveAt(index);
+            lstAccounts.Items.RemoveAt(index);
+            lstAccounts.SelectedIndex = index - 1;
+
+            string updatedJsonString = JsonConvert.SerializeObject(userList, Formatting.Indented);
+            File.WriteAllText("users.json", updatedJsonString);
+        }
+
+        private void btnCopyUname_Click(object sender, EventArgs e)
+        {
+            string uName = (string)userList[lstAccounts.SelectedIndex]["uname"];
+            Clipboard.SetText(uName);
+            lblStatus.Text = $"\'{uName}\' copied to clipboard";
+        }
+
+        private void btnCopyPass_Click(object sender, EventArgs e)
+        {
+            string pass = (string)userList[lstAccounts.SelectedIndex]["pass"];
+            Clipboard.SetText(pass);
+            lblStatus.Text = $"\'{pass}\' copied to clipboard";
         }
     }
 }

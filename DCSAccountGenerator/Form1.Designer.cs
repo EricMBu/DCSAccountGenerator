@@ -40,6 +40,9 @@
             btnCreate = new Button();
             btnCancel = new Button();
             lblCaptchaStatus = new Label();
+            btnDelete = new Button();
+            btnCopyUname = new Button();
+            btnCopyPass = new Button();
             ((System.ComponentModel.ISupportInitialize)imgCaptcha).BeginInit();
             SuspendLayout();
             // 
@@ -109,13 +112,13 @@
             // 
             // lblStatus
             // 
-            lblStatus.AutoSize = true;
-            lblStatus.Location = new Point(311, 314);
+            lblStatus.ImageAlign = ContentAlignment.MiddleLeft;
+            lblStatus.Location = new Point(240, 314);
             lblStatus.Name = "lblStatus";
-            lblStatus.RightToLeft = RightToLeft.No;
-            lblStatus.Size = new Size(38, 15);
+            lblStatus.Size = new Size(242, 15);
             lblStatus.TabIndex = 7;
             lblStatus.Text = "status";
+            lblStatus.TextAlign = ContentAlignment.MiddleRight;
             // 
             // txtCaptcha
             // 
@@ -129,7 +132,7 @@
             // btnCreate
             // 
             btnCreate.Enabled = false;
-            btnCreate.Location = new Point(175, 148);
+            btnCreate.Location = new Point(175, 105);
             btnCreate.Margin = new Padding(3, 2, 3, 2);
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(82, 22);
@@ -141,7 +144,7 @@
             // btnCancel
             // 
             btnCancel.Enabled = false;
-            btnCancel.Location = new Point(175, 175);
+            btnCancel.Location = new Point(175, 132);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(82, 23);
             btnCancel.TabIndex = 10;
@@ -160,11 +163,47 @@
             lblCaptchaStatus.TabIndex = 11;
             lblCaptchaStatus.Text = "status";
             // 
+            // btnDelete
+            // 
+            btnDelete.Enabled = false;
+            btnDelete.Location = new Point(175, 192);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(82, 23);
+            btnDelete.TabIndex = 12;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnCopyUname
+            // 
+            btnCopyUname.Enabled = false;
+            btnCopyUname.Location = new Point(257, 238);
+            btnCopyUname.Name = "btnCopyUname";
+            btnCopyUname.Size = new Size(116, 23);
+            btnCopyUname.TabIndex = 13;
+            btnCopyUname.Text = "Copy Username";
+            btnCopyUname.UseVisualStyleBackColor = true;
+            btnCopyUname.Click += btnCopyUname_Click;
+            // 
+            // btnCopyPass
+            // 
+            btnCopyPass.Enabled = false;
+            btnCopyPass.Location = new Point(257, 267);
+            btnCopyPass.Name = "btnCopyPass";
+            btnCopyPass.Size = new Size(116, 23);
+            btnCopyPass.TabIndex = 14;
+            btnCopyPass.Text = "Copy Password";
+            btnCopyPass.UseVisualStyleBackColor = true;
+            btnCopyPass.Click += btnCopyPass_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(494, 338);
+            Controls.Add(btnCopyPass);
+            Controls.Add(btnCopyUname);
+            Controls.Add(btnDelete);
             Controls.Add(lblCaptchaStatus);
             Controls.Add(btnCancel);
             Controls.Add(btnCreate);
@@ -200,5 +239,8 @@
         private Button btnCreate;
         private Button btnCancel;
         private Label lblCaptchaStatus;
+        private Button btnDelete;
+        private Button btnCopyUname;
+        private Button btnCopyPass;
     }
 }
