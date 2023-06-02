@@ -5,10 +5,6 @@ using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using System.Diagnostics;
-using System.Net.Mail;
-using OpenQA.Selenium.Edge;
-using System.Reflection.Metadata;
 
 namespace DCSAccountGenerator
 {
@@ -171,8 +167,6 @@ namespace DCSAccountGenerator
             else
             {
                 lblStatus.Text = "Generating email...";
-                //mailDriver.Manage().Cookies.DeleteAllCookies();
-                //Thread.Sleep(3000);
                 mailDriver.Navigate().GoToUrl("https://10minute-email.com/");
                 IWebElement newAddress = mailDriver.FindElement(By.XPath("//*[@id=\"mailapp\"]/div[1]/div[3]/button"));
                 newAddress.Click();
@@ -283,12 +277,21 @@ namespace DCSAccountGenerator
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            edDriver.Close();
-            mailDriver.Close();
+            lblStatus.Text = "Quitting...";
+            try
+            {
+                edDriver.Quit();
+                mailDriver.Quit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }   
         }
 
         private void btnActivate_Click(object sender, EventArgs e)
         {
+            btnActivate.Enabled = false;
             lblStatus.Text = "Clearing cookies...";
 
             edDriver.Manage().Cookies.DeleteAllCookies();
@@ -336,6 +339,8 @@ namespace DCSAccountGenerator
             userList[lstAccounts.SelectedIndex]["expiryDate"] = expiry;
             string updatedJsonString = JsonConvert.SerializeObject(userList, Formatting.Indented);
             File.WriteAllText("users.json", updatedJsonString);
+
+            txtInfo.Text = DictToString(userList[lstAccounts.SelectedIndex]);
         }
 
         private void txtUName_TextChanged(object sender, EventArgs e)
@@ -345,7 +350,6 @@ namespace DCSAccountGenerator
 
         private void LoadCaptcha()
         {
-            //edDriver.Navigate().GoToUrl("https://www.digitalcombatsimulator.com/en/auth/?register=yes");
             IWebElement captcha = edDriver.FindElement(By.Id("captcha-img"));
             string captchaURL = captcha.GetAttribute("src");
             imgCaptcha.Load(captchaURL);
