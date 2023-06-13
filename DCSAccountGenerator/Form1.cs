@@ -286,7 +286,7 @@ namespace DCSAccountGenerator
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }   
+            }
         }
 
         private void btnActivate_Click(object sender, EventArgs e)
