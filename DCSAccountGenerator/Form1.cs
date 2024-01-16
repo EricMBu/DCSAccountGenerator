@@ -5,6 +5,8 @@ using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System.Diagnostics;
+using System.Security.Policy;
 
 namespace DCSAccountGenerator
 {
@@ -99,11 +101,27 @@ namespace DCSAccountGenerator
             PopulateListBox();
             lblStatus.Text = string.Empty;
 
-            var driverService = ChromeDriverService.CreateDefaultService();
-            driverService.HideCommandPromptWindow = true;
+            try
+            {
+                ChromeDriverService driverService = ChromeDriverService.CreateDefaultService();
+                driverService.HideCommandPromptWindow = true;
+                edDriver = new ChromeDriver(driverService, options);
+                mailDriver = new ChromeDriver(driverService, options);
+            }
+            catch (WebDriverException ex)
+            {
+                string message = "Chrome Webdriver could not be found. Would you like to go to the download page?";
+                string title = "Driver error";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult res = MessageBox.Show(message, title, buttons, MessageBoxIcon.Error);
+                if (res == DialogResult.Yes)
+                {
+                    Process.Start(new ProcessStartInfo("https://chromedriver.chromium.org/downloads") { UseShellExecute = true });
+                }
+                Application.Exit();
+                Environment.Exit(0);
+            }
 
-            edDriver = new ChromeDriver(driverService, options);
-            mailDriver = new ChromeDriver(driverService, options);
             wait = new WebDriverWait(mailDriver, TimeSpan.FromSeconds(10));
             edWait = new WebDriverWait(edDriver, TimeSpan.FromSeconds(10));
 
@@ -280,8 +298,11 @@ namespace DCSAccountGenerator
             lblStatus.Text = "Quitting...";
             try
             {
-                edDriver.Quit();
-                mailDriver.Quit();
+                if (edDriver != null && mailDriver != null)
+                {
+                    edDriver.Quit();
+                    mailDriver.Quit();
+                }
             }
             catch (Exception ex)
             {
@@ -379,5 +400,6 @@ namespace DCSAccountGenerator
             Clipboard.SetText(pass);
             lblStatus.Text = $"\'{pass}\' copied to clipboard";
         }
+
     }
 }
