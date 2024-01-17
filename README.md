@@ -1,5 +1,6 @@
+## ⚠️As of January 2024, the free trial activator no longer works⚠️
 # DCS Account Generator
-Digital Combat Simulator account generator and free trial activator
+Digital Combat Simulator account generator
 
 ## Requirements
 <ul>
@@ -19,7 +20,7 @@ Digital Combat Simulator account generator and free trial activator
 DCSAccountGenerator.exe will be in the bin directory
 
 ## Use Instructions
-This app has two separated funtions; creating a new account, and activating the free trial licenses on those accounts
+This app has two separate funtions; creating a new account, <s>and activating the free trial licenses on those accounts</s> - this feature no longer works, as activating trials now requires 2FA.
 
 ### Creating a new account
 <ol>
@@ -34,8 +35,10 @@ A secure password is automatically generated, and six random digits are appended
 <br />
 
 ### Activating an account
-Select an existing account from the listbox, and click 'Activate Trials'.
+<s>Select an existing account from the listbox, and click 'Activate Trials'.</s>
 <br>
-The activation and expiry dates will be saved and displayed in the info box.
+<s>The activation and expiry dates will be saved and displayed in the info box.</s>
+<br>
+I'll see what I can do to fix this feature
 
   
